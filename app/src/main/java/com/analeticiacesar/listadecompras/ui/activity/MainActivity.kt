@@ -10,9 +10,13 @@ class MainActivity : AppCompatActivity() {
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.recyclerView.adapter = ItemProductAdapter(this, listOf(Product("Cesta de Fruta", "Laranja, maçã, uva", "100.00".toBigDecimal())))
+        binding.recyclerView.adapter = ItemProductAdapter(
+            this,
+            listOf(Product("Cesta de Fruta", "Laranja, maçã, uva", "100.00".toBigDecimal()))
+        )
         setContentView(binding.root)
     }
 }

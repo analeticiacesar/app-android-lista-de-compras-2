@@ -13,15 +13,14 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onResume() {
+        super.onResume()
         val dao = ProductDAO()
+        setContentView(binding.root)
         binding.recyclerView.adapter = ItemProductAdapter(
             this,
             dao.searchAll()
         )
-        setContentView(binding.root)
-
         binding.floatingActionButton.setOnClickListener {
             val intent = Intent(this, ProductFormActivity::class.java)
             startActivity(intent)

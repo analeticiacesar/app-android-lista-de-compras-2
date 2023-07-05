@@ -36,7 +36,6 @@ class ItemProductAdapter (
         private val description = binding.textDescription
         private val price = binding.textPrice
         fun bind(item: Product) {
-            Log.i("Information", "bind: ${item.name}")
             name.text = item.name
             description.text = item.description
             price.text = item.value.toPlainString()

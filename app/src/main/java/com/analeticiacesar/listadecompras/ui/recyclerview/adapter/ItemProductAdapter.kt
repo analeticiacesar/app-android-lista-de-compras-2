@@ -1,6 +1,7 @@
 package com.analeticiacesar.listadecompras.ui.recyclerview.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,20 +10,9 @@ import com.analeticiacesar.listadecompras.model.Product
 
 class ItemProductAdapter (
     private val context: Context,
-    private val items: List<Product>
-        ) : RecyclerView.Adapter<ItemProductAdapter.ViewHolder>() {
+    items: List<Product> ) : RecyclerView.Adapter<ItemProductAdapter.ViewHolder>() {
 
-    class ViewHolder(binding: ItemProductBinding) : RecyclerView.ViewHolder(binding.root) {
-        private val name = binding.textName
-        private val description = binding.textDescription
-        private val price = binding.textPrice
-
-        fun bind(item: Product) {
-            name.text = item.name
-            description.text = item.description
-            price.text = item.value.toPlainString()
-        }
-    }
+    private val products = items.toMutableList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemProductBinding.inflate(LayoutInflater.from(context), parent, false)
@@ -30,10 +20,27 @@ class ItemProductAdapter (
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = items[position]
+        val item = products[position]
         holder.bind(item)
     }
 
-    override fun getItemCount() = items.size
+    override fun getItemCount() = products.size
+    fun update(products: List<Product>) {
+        this.products.clear()
+        this.products.addAll(products)
+        notifyDataSetChanged()
+    }
+
+    class ViewHolder(binding: ItemProductBinding) : RecyclerView.ViewHolder(binding.root) {
+        private val name = binding.textName
+        private val description = binding.textDescription
+        private val price = binding.textPrice
+        fun bind(item: Product) {
+            Log.i("Information", "bind: ${item.name}")
+            name.text = item.name
+            description.text = item.description
+            price.text = item.value.toPlainString()
+        }
+    }
 
 }

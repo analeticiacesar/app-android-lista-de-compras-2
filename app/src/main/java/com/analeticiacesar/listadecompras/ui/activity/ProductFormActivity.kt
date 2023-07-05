@@ -3,6 +3,7 @@ package com.analeticiacesar.listadecompras.ui.activity
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.analeticiacesar.listadecompras.dao.ProductDAO
 import com.analeticiacesar.listadecompras.databinding.ActivityProductFormBinding
 import com.analeticiacesar.listadecompras.model.Product
 
@@ -21,7 +22,8 @@ class ProductFormActivity : AppCompatActivity() {
                     textDescription.text.toString(),
                     textPrice.text.toString().toBigDecimal()
                 )
-                Log.i("ProductFormActivity", "onCreate: Produto = $newProduct")
+                val dao = ProductDAO()
+                dao.add(newProduct)
             }
         }
     }

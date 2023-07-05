@@ -1,5 +1,6 @@
 package com.analeticiacesar.listadecompras.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.analeticiacesar.listadecompras.databinding.ActivityMainBinding
@@ -18,5 +19,10 @@ class MainActivity : AppCompatActivity() {
             listOf(Product("Cesta de Fruta", "Laranja, maçã, uva", "100.00".toBigDecimal()))
         )
         setContentView(binding.root)
+
+        binding.floatingActionButton.setOnClickListener {
+            val intent = Intent(this, ProductFormActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

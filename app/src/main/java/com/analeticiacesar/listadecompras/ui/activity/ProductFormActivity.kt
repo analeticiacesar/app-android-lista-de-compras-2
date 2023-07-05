@@ -13,8 +13,6 @@ class ProductFormActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityProductFormBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
         binding.buttonSave.setOnClickListener {
             binding.run {
                 val newProduct = Product(
@@ -24,6 +22,7 @@ class ProductFormActivity : AppCompatActivity() {
                 )
                 val dao = ProductDAO()
                 dao.add(newProduct)
+                finish()
             }
         }
     }

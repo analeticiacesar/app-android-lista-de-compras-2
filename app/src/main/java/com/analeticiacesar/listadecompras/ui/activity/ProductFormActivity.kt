@@ -13,17 +13,20 @@ class ProductFormActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityProductFormBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setupSaveButton()
+    }
+
+    private fun setupSaveButton() {
         binding.buttonSave.setOnClickListener {
-            binding.run {
-                val newProduct = Product(
-                    textName.text.toString(),
-                    textDescription.text.toString(),
-                    textPrice.text.toString().toBigDecimal()
-                )
-                val dao = ProductDAO()
-                dao.add(newProduct)
-                finish()
-            }
+            val dao = ProductDAO()
+            dao.add(createProduct())
+            finish()
         }
     }
+
+    private fun createProduct() = Product(
+        binding.textName.text.toString(),
+        binding.textDescription.text.toString(),
+        binding.textPrice.text.toString().toBigDecimal()
+    )
 }

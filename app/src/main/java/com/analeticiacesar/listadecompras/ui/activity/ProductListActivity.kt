@@ -1,25 +1,23 @@
 package com.analeticiacesar.listadecompras.ui.activity
 
 import android.content.Intent
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.analeticiacesar.listadecompras.dao.ProductDAO
-import com.analeticiacesar.listadecompras.databinding.ActivityMainBinding
-import com.analeticiacesar.listadecompras.model.Product
+import com.analeticiacesar.listadecompras.databinding.ActivityProductListBinding
 import com.analeticiacesar.listadecompras.ui.recyclerview.adapter.ItemProductAdapter
 
-class MainActivity : AppCompatActivity() {
+class ProductListActivity : AppCompatActivity() {
     private val binding by lazy {
-        ActivityMainBinding.inflate(layoutInflater)
+        ActivityProductListBinding.inflate(layoutInflater)
     }
 
     override fun onResume() {
         super.onResume()
-        val dao = ProductDAO()
         setContentView(binding.root)
+        val dao = ProductDAO()
         binding.recyclerView.adapter = ItemProductAdapter(
-            this,
-            dao.searchAll()
+            context = this,
+            items = dao.searchAll()
         )
         binding.floatingActionButton.setOnClickListener {
             val intent = Intent(this, ProductFormActivity::class.java)

@@ -1,27 +1,41 @@
 package com.analeticiacesar.listadecompras.ui.activity
 
 import android.content.Intent
+import android.os.Bundle
+import android.os.PersistableBundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.analeticiacesar.listadecompras.dao.ProductDAO
 import com.analeticiacesar.listadecompras.databinding.ActivityProductListBinding
 import com.analeticiacesar.listadecompras.ui.recyclerview.adapter.ItemProductAdapter
 
 class ProductListActivity : AppCompatActivity() {
-    private val binding by lazy {
-        ActivityProductListBinding.inflate(layoutInflater)
+
+    private lateinit var binding: ActivityProductListBinding
+    private val dao = ProductDAO()
+    private val adapter = ItemProductAdapter(context = this, items = dao.searchAll())
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityProductListBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setupRecyclerView()
     }
 
     override fun onResume() {
         super.onResume()
-        setContentView(binding.root)
-        val dao = ProductDAO()
-        binding.recyclerView.adapter = ItemProductAdapter(
-            context = this,
-            items = dao.searchAll()
-        )
+        adapter.update(dao.searchAll())
+        setupFloatingActionButton()
+    }
+
+    private fun setupFloatingActionButton() {
         binding.floatingActionButton.setOnClickListener {
             val intent = Intent(this, ProductFormActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun setupRecyclerView() {
+        binding.recyclerView.adapter = adapter
     }
 }

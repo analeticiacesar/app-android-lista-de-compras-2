@@ -25,8 +25,8 @@ class ProductFormActivity : AppCompatActivity() {
     }
 
     private fun createProduct() = Product(
-        binding.textName.text.toString(),
-        binding.textDescription.text.toString(),
-        binding.textPrice.text.toString().toBigDecimal()
+        binding.editTextName.text.toString(),
+        binding.editTextDescription.text.toString(),
+        binding.editTextValue.text.toString().toBigDecimal()
     )
 }

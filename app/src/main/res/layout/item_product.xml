@@ -10,37 +10,55 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:fontFamily="@font/montserrat"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/image_item"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Cesta de frutas" />
+        tools:text="@tools:sample/lorem/random" />
 
     <TextView
         android:id="@+id/text_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:fontFamily="@font/montserrat"
+        android:maxLines="1"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@id/text_name"
         app:layout_constraintStart_toStartOf="@id/text_name"
         app:layout_constraintTop_toBottomOf="@id/text_name"
-        tools:text="Laranja, maçãm, banana" />
+        tools:text="@tools:sample/lorem/random" />
 
     <TextView
         android:id="@+id/text_price"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/montserrat"
+        android:textSize="18sp"
+        android:textColor="@android:color/holo_green_dark"
+        android:layout_marginBottom="16dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/text_name"
         app:layout_constraintStart_toStartOf="@id/text_name"
         app:layout_constraintTop_toBottomOf="@id/text_description"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:text="R$19,90" />
 
     <ImageView
         android:id="@+id/image_item"
         android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/text_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="8dp"
+        android:scaleType="centerCrop"
         android:src="@android:color/holo_blue_bright"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 

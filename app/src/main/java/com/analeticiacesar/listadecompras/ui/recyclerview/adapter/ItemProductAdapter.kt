@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.analeticiacesar.listadecompras.databinding.ItemProductBinding
 import com.analeticiacesar.listadecompras.model.Product
 import java.math.BigDecimal
@@ -12,8 +13,8 @@ import java.text.NumberFormat
 import java.util.Locale
 
 class ItemProductAdapter (
-    private val context: Context,
-    items: List<Product> ) : RecyclerView.Adapter<ItemProductAdapter.ViewHolder>() {
+    private val context: Context, items: List<Product>
+) : RecyclerView.Adapter<ItemProductAdapter.ViewHolder>() {
 
     private val products = items.toMutableList()
 
@@ -28,6 +29,7 @@ class ItemProductAdapter (
     }
 
     override fun getItemCount() = products.size
+
     fun update(products: List<Product>) {
         this.products.clear()
         this.products.addAll(products)
@@ -35,13 +37,17 @@ class ItemProductAdapter (
     }
 
     class ViewHolder(binding: ItemProductBinding) : RecyclerView.ViewHolder(binding.root) {
+
         private val name = binding.textName
         private val description = binding.textDescription
         private val price = binding.textPrice
+        private val image = binding.imageItem
+
         fun bind(item: Product) {
             name.text = item.name
             description.text = item.description
             price.text = formatForBrazilianCurrency(item.value)
+            image.load(item.image)
         }
 
         private fun formatForBrazilianCurrency(value: BigDecimal): String {

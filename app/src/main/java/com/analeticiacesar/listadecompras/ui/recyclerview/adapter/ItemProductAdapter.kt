@@ -3,6 +3,7 @@ package com.analeticiacesar.listadecompras.ui.recyclerview.adapter
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
@@ -13,7 +14,7 @@ import java.math.BigDecimal
 import java.text.NumberFormat
 import java.util.Locale
 
-class ItemProductAdapter (
+class ItemProductAdapter(
     private val context: Context, items: List<Product>
 ) : RecyclerView.Adapter<ItemProductAdapter.ViewHolder>() {
 
@@ -48,9 +49,12 @@ class ItemProductAdapter (
             name.text = item.name
             description.text = item.description
             price.text = formatForBrazilianCurrency(item.value)
-            image.load(item.image) {
-                fallback(R.drawable.erro)
-                error(R.drawable.erro)
+            if (item.image == null) {
+                image.visibility = View.GONE
+            } else {
+                image.load(item.image) {
+                    error(R.drawable.erro)
+                }
             }
         }
 

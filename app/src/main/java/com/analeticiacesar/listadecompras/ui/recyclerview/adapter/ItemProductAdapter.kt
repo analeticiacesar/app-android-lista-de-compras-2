@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.analeticiacesar.listadecompras.R
 import com.analeticiacesar.listadecompras.databinding.ItemProductBinding
 import com.analeticiacesar.listadecompras.model.Product
 import java.math.BigDecimal
@@ -47,7 +48,10 @@ class ItemProductAdapter (
             name.text = item.name
             description.text = item.description
             price.text = formatForBrazilianCurrency(item.value)
-            image.load(item.image)
+            image.load(item.image) {
+                fallback(R.drawable.erro)
+                error(R.drawable.erro)
+            }
         }
 
         private fun formatForBrazilianCurrency(value: BigDecimal): String {

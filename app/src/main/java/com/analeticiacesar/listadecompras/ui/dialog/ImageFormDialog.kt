@@ -7,17 +7,21 @@ import com.analeticiacesar.listadecompras.databinding.ImageFormBinding
 import com.analeticiacesar.listadecompras.extensions.loadImage
 
 class ImageFormDialog(private val context: Context) {
-    fun showDialog() {
-        val bindingImageForm = ImageFormBinding.inflate(LayoutInflater.from(context))
-        bindingImageForm.buttonLoad.setOnClickListener {
-            val url = bindingImageForm.editTextUrl.text.toString()
-            bindingImageForm.imageItem.loadImage(url)
+    fun showDialog(urlPadrao: String? = null, whenLoadImage: (image: String) -> Unit) {
+        val binding = ImageFormBinding.inflate(LayoutInflater.from(context))
+        urlPadrao?.let {
+            binding.imageItem.loadImage(it)
+            binding.editTextUrl.setText(it)
+        }
+        binding.buttonLoad.setOnClickListener {
+            val url = binding.editTextUrl.text.toString()
+            binding.imageItem.loadImage(url)
         }
         AlertDialog.Builder(context)
-            .setView(bindingImageForm.root)
+            .setView(binding.root)
             .setPositiveButton("Confirmar") { _, _ ->
-//                binding.imageItem.loadImage(url)
-
+                val url = binding.editTextUrl.text.toString()
+                whenLoadImage(url)
             }
             .setNegativeButton("Cancelar") { _, _ ->
 

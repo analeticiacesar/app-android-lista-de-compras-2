@@ -2,8 +2,6 @@ package com.analeticiacesar.listadecompras.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.analeticiacesar.listadecompras.dao.ProductDAO
 import com.analeticiacesar.listadecompras.databinding.ActivityProductListBinding

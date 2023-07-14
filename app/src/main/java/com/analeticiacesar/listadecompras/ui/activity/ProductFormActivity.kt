@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.analeticiacesar.listadecompras.dao.ProductDAO
 import com.analeticiacesar.listadecompras.databinding.ActivityProductFormBinding
+import com.analeticiacesar.listadecompras.extensions.loadImage
 import com.analeticiacesar.listadecompras.model.Product
 import com.analeticiacesar.listadecompras.ui.dialog.ImageFormDialog
 
@@ -20,7 +21,10 @@ class ProductFormActivity : AppCompatActivity() {
 
     private fun setupClickImage() {
         binding.imageItem.setOnClickListener {
-            ImageFormDialog(this).showDialog()
+            ImageFormDialog(this).showDialog (url) { imageUrl ->
+                url = imageUrl
+                binding.imageItem.loadImage(url)
+            }
         }
     }
 

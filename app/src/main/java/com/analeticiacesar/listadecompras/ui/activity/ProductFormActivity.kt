@@ -1,14 +1,11 @@
 package com.analeticiacesar.listadecompras.ui.activity
 
 import android.os.Bundle
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import coil.load
-import com.analeticiacesar.listadecompras.R
 import com.analeticiacesar.listadecompras.dao.ProductDAO
 import com.analeticiacesar.listadecompras.databinding.ActivityProductFormBinding
-import com.analeticiacesar.listadecompras.databinding.ImageFormBinding
 import com.analeticiacesar.listadecompras.model.Product
+import com.analeticiacesar.listadecompras.ui.dialog.ImageFormDialog
 
 class ProductFormActivity : AppCompatActivity() {
     lateinit var binding: ActivityProductFormBinding
@@ -23,21 +20,7 @@ class ProductFormActivity : AppCompatActivity() {
 
     private fun setupClickImage() {
         binding.imageItem.setOnClickListener {
-            val bindingImageForm = ImageFormBinding.inflate(layoutInflater)
-            bindingImageForm.buttonLoad.setOnClickListener {
-                url = bindingImageForm.editTextUrl.text.toString()
-                bindingImageForm.imageItem.load(url)
-            }
-            AlertDialog.Builder(this)
-                .setView(bindingImageForm.root)
-                .setPositiveButton("Confirmar") { _, _ ->
-                    binding.imageItem.load(url)
-
-                }
-                .setNegativeButton("Cancelar") { _, _ ->
-                    url = null
-                }
-                .show()
+            ImageFormDialog(this).showDialog()
         }
     }
 

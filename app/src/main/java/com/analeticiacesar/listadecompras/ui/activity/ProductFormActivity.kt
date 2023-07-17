@@ -13,6 +13,7 @@ class ProductFormActivity : AppCompatActivity() {
     private var url: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        title = "Cadastrar Produto"
         binding = ActivityProductFormBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupClickImage()
